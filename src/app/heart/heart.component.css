@@ -544,3 +544,245 @@ svg.damage {
 svg.damage-intense {
   animation: undertale-damage-intense 0.8s ease-out;
 }
+
+/* === ANIMATION SLAY UNDERTALE AUTHENTIQUE === */
+
+/* Animation principale inspirée de la mort de Chara/Frisk */
+@keyframes undertale-slay {
+  /* Phase 1: Flash blanc intense (comme dans le jeu) */
+  0% {
+    transform: scale(1) rotate(0deg);
+    filter: brightness(1) contrast(1) hue-rotate(0deg);
+    opacity: 1;
+  }
+  
+  /* Flash blanc instantané */
+  5% {
+    transform: scale(1.1) rotate(0deg);
+    filter: brightness(5) contrast(3) saturate(0);
+    opacity: 1;
+  }
+  
+  /* Phase 2: Fragmentation et dispersion */
+  15% {
+    transform: scale(1.05) rotate(-2deg);
+    filter: brightness(3) contrast(2) hue-rotate(0deg);
+    opacity: 0.9;
+  }
+  
+  25% {
+    transform: scale(0.95) rotate(1deg);
+    filter: brightness(2) contrast(1.5) hue-rotate(10deg);
+    opacity: 0.8;
+  }
+  
+  35% {
+    transform: scale(1.1) rotate(-1deg);
+    filter: brightness(2.5) contrast(2) hue-rotate(-5deg);
+    opacity: 0.7;
+  }
+  
+  /* Phase 3: Désintégration progressive */
+  50% {
+    transform: scale(0.8) rotate(3deg);
+    filter: brightness(1.5) contrast(1.2) hue-rotate(15deg);
+    opacity: 0.5;
+  }
+  
+  65% {
+    transform: scale(0.6) rotate(-2deg);
+    filter: brightness(1.2) contrast(1) hue-rotate(30deg);
+    opacity: 0.3;
+  }
+  
+  80% {
+    transform: scale(0.3) rotate(5deg);
+    filter: brightness(0.8) contrast(0.8) hue-rotate(45deg);
+    opacity: 0.1;
+  }
+  
+  /* Phase 4: Disparition finale */
+  100% {
+    transform: scale(0) rotate(10deg);
+    filter: brightness(0.5) contrast(0.5) hue-rotate(60deg);
+    opacity: 0;
+  }
+}
+
+/* Animation des particules de poussière (effet Undertale) */
+@keyframes dust-particles {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0);
+  }
+  
+  20% {
+    opacity: 1;
+    transform: translateY(-5px) scale(1);
+  }
+  
+  100% {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.5);
+  }
+}
+
+/* Classe principale pour l'animation slay */
+svg.slayed {
+  animation: undertale-slay 1.2s ease-in-out forwards;
+  transform-origin: center center;
+}
+
+/* === PARTICULES DE POUSSIÈRE === */
+/* Tu peux ajouter ces éléments dans ton HTML pour l'effet de poussière */
+
+.dust-particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background-color: #888;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.dust-particle.active {
+  animation: dust-particles 1s ease-out forwards;
+}
+
+/* Variantes pour différentes particules */
+.dust-particle:nth-child(1) { animation-delay: 0.1s; }
+.dust-particle:nth-child(2) { animation-delay: 0.2s; }
+.dust-particle:nth-child(3) { animation-delay: 0.3s; }
+.dust-particle:nth-child(4) { animation-delay: 0.4s; }
+.dust-particle:nth-child(5) { animation-delay: 0.5s; }
+
+/* === SUPPRESSION DE L'OUTLINE AU CLIC === */
+
+/* Supprime l'outline sur tous les éléments cliquables */
+svg {
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Supprime spécifiquement l'outline sur focus */
+svg:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Supprime l'effet de surbrillance sur mobile */
+svg:active {
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* === ANIMATION ALTERNATIVE PLUS DRAMATIQUE === */
+
+@keyframes undertale-slay-dramatic {
+  /* Flash blanc plus long */
+  0% {
+    transform: scale(1) rotate(0deg);
+    filter: brightness(1) contrast(1) hue-rotate(0deg) blur(0px);
+    opacity: 1;
+  }
+  
+  /* Flash blanc intense et long */
+  8% {
+    transform: scale(1.2) rotate(0deg);
+    filter: brightness(8) contrast(5) saturate(0) blur(0px);
+    opacity: 1;
+  }
+  
+  12% {
+    transform: scale(1.15) rotate(0deg);
+    filter: brightness(6) contrast(4) saturate(0) blur(1px);
+    opacity: 1;
+  }
+  
+  /* Début de la fragmentation */
+  20% {
+    transform: scale(1.1) rotate(-3deg);
+    filter: brightness(4) contrast(2.5) hue-rotate(0deg) blur(1px);
+    opacity: 0.95;
+  }
+  
+  30% {
+    transform: scale(0.9) rotate(2deg);
+    filter: brightness(3) contrast(2) hue-rotate(20deg) blur(2px);
+    opacity: 0.85;
+  }
+  
+  40% {
+    transform: scale(1.05) rotate(-2deg);
+    filter: brightness(2.5) contrast(1.8) hue-rotate(-10deg) blur(3px);
+    opacity: 0.7;
+  }
+  
+  50% {
+    transform: scale(0.8) rotate(4deg);
+    filter: brightness(2) contrast(1.5) hue-rotate(30deg) blur(4px);
+    opacity: 0.55;
+  }
+  
+  /* Désintégration rapide */
+  65% {
+    transform: scale(0.5) rotate(-3deg);
+    filter: brightness(1.5) contrast(1.2) hue-rotate(45deg) blur(5px);
+    opacity: 0.35;
+  }
+  
+  80% {
+    transform: scale(0.2) rotate(6deg);
+    filter: brightness(1) contrast(0.8) hue-rotate(60deg) blur(6px);
+    opacity: 0.15;
+  }
+  
+  /* Disparition */
+  100% {
+    transform: scale(0) rotate(10deg);
+    filter: brightness(0.5) contrast(0.5) hue-rotate(90deg) blur(8px);
+    opacity: 0;
+  }
+}
+
+/* Classe alternative pour une animation plus dramatique */
+svg.slayed-dramatic {
+  animation: undertale-slay-dramatic 1.5s ease-in-out forwards;
+  transform-origin: center center;
+}
+
+/* === EFFET SONORE VISUEL === */
+/* Animation qui simule les "ondes" sonores du bruit de mort */
+
+@keyframes sound-wave {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+  }
+  
+  70% {
+    box-shadow: 0 0 0 20px rgba(255, 255, 255, 0);
+  }
+  
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  }
+}
+
+/* À appliquer pendant l'animation slay */
+svg.slayed::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  animation: sound-wave 0.6s ease-out;
+}
