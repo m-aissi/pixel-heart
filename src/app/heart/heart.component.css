@@ -786,3 +786,23 @@ svg.slayed::before {
   border-radius: 50%;
   animation: sound-wave 0.6s ease-out;
 }
+
+/* Contrôle musique discret */
+.music-control-discrete {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+}
+
+.music-btn {
+  background: transparent;
+  border: none;
+  color: #666;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  opacity: 0.6;
+}

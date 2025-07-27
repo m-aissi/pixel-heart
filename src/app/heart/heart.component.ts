@@ -1,6 +1,6 @@
 // heart.component.ts - Version avec animation slay Undertale authentique
 
-import { Component, Renderer2, ElementRef, ViewChild } from '@angular/core';
+import { Component, Renderer2, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -9,15 +9,45 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./heart.component.css'],
   imports: [CommonModule]
 })
-export class HeartComponent {
-  hp = 100;
-  maxHp = 100;
+export class HeartComponent implements OnInit {
+  isPlaying = false;
+@ViewChild('bgmAudio', { static: true }) bgmAudio!: ElementRef<HTMLAudioElement>;
+
+ngOnInit(): void {
+  this.setupAudio();
+}
+
+private setupAudio(): void {
+  const audio = this.bgmAudio.nativeElement;
+  audio.volume = 0.2; // Volume discret à 20%
+  
+  audio.addEventListener('ended', () => {
+    this.isPlaying = false;
+  });
+}
+
+toggleMusic(): void {
+  const audio = this.bgmAudio.nativeElement;
+  
+  if (this.isPlaying) {
+    audio.pause();
+    this.isPlaying = false;
+  } else {
+    audio.play().then(() => {
+      this.isPlaying = true;
+    }).catch((error) => {
+      console.error('Erreur lecture audio:', error);
+    });
+  }
+}
+  hp = 199;
+  maxHp = 199;
   isSlayed = false;
   showVictoryModal = false;
   currentMessage = '';
   
   messages = [
-    "Tu as vaincu ce cœur... maintenant vaincs ta journée 💪"
+    "Ihih trop slay !! T'as slay le coeur, maintenant tu n'as plus qu'à slay ton entretiens demain. Je crois en toi ! Et puis regardless de l'outcome tu as gagné ceci : clique ici !! (en esperant que ça te vas comme recompense pour avoir oser y aller)"
   ];
 
   @ViewChild('heartSvg', { static: true }) heartSvg!: ElementRef<SVGElement>;
@@ -44,8 +74,8 @@ export class HeartComponent {
     setTimeout(() => {
       this.renderer.removeClass(this.heartSvg.nativeElement, damageClass);
     }, animationDuration);
-
-    this.hp = Math.max(0, this.hp - 10);
+    let hpLost = Math.floor(Math.random() * 17) + 3;
+    this.hp = Math.max(0, this.hp - hpLost);
 
     if (this.hp === 0) {
       this.triggerUndertaleSlayAnimation();
@@ -73,7 +103,10 @@ export class HeartComponent {
       this.showVictoryModal = true;
     }, 1200); // Durée de l'animation slay
   }
-
+  openImage(): void {
+    const url = 'https://media.discordapp.net/attachments/776543561776365578/1399112593133670431/Untitled-1.png?ex=6887d0a4&is=68867f24&hm=a4ba0521b5a3ebe97a18b6f4dd7990eb73b2ec4ce676fc400110cccd4e2adb5d&=&format=webp&quality=lossless&width=1132&height=968';
+    window.open(url, '_blank');
+  }
   private createDustParticles(): void {
     const container = this.heartContainer.nativeElement;
     const heartRect = this.heartSvg.nativeElement.getBoundingClientRect();

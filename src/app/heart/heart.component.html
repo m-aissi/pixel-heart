@@ -4,8 +4,19 @@
   
   <!-- Titre -->
   <h1 class="game-title text-center mb-4">
-    ❤️ UNDERTALE HEART ❤️
-  </h1>
+<!-- Contrôle Musique Discret -->
+    
+<i     (click)="toggleMusic()"
+class="bi" [ngClass]="isPlaying ? 'bi-volume-up-fill' : 'bi-volume-mute-fill'"></i>
+
+<!-- Audio element (caché) -->
+<audio 
+  #bgmAudio
+  loop
+  preload="auto">
+  <source src="assets/audio/bgm.mp3" type="audio/mpeg">
+</audio>  
+</h1>
 
   <!-- Barre de HP -->
   <div class="hp-container mb-4">
@@ -20,7 +31,7 @@
 
   <!-- Instructions -->
   <p class="instructions text-center mb-4">
-    Clique sur le cœur pour l'attaquer !
+    stay determined !
   </p>
 
   <!-- Container du cœur (pour les particules) -->
@@ -55,9 +66,7 @@
       <!-- Slash rouge (simplifié, sans le rectangle moche) -->
       <rect 
         #slashRect
-        x="2" y="2" width="12" height="2" 
-        fill="#ff0000" 
-        style="opacity: 0; transform-origin: center;"
+
         class="slash"
       />
     </svg>
@@ -65,7 +74,7 @@
 
   <!-- Message temporaire après slayed -->
   <div *ngIf="isSlayed && !showVictoryModal" class="slayed-message text-center">
-    <h2 class="text-warning">💀 SLAYED! 💀</h2>
+    <h2 class="text-warning">( ◡̀ ᴗ ◡́)و</h2>
   </div>
 
 </div>
@@ -92,9 +101,12 @@
         </div>
         
         <!-- Message motivant -->
-        <div class="victory-message mb-4">
+        <div class="victory-message mb-4 ">
           <p class="h5 text-info lh-base px-3">
-            {{currentMessage}}
+            Ihih trop slay !! <br>
+            Demain tu vas slay ton entretien aussi hehe. <br>
+             Je crois en toi ! <br>
+             Un petit cadeau pour t'encourager!! :3
           </p>
         </div>
         
@@ -102,8 +114,8 @@
         <button 
           type="button" 
           class="btn undertale-button"
-          (click)="resetGame()">
-          ⚡ RECOMMENCER ⚡
+          (click)="openImage()">
+          for u !!
         </button>
         
       </div>
