@@ -1,0 +1,38 @@
+<svg 
+  #heartSvg
+  [class.floating]="!isSlayed"
+  [class.slayed]="isSlayed"
+  (click)="onClick()"
+  width="150" 
+  height="150" 
+  viewBox="0 0 16 16" 
+  style="cursor: pointer; image-rendering: pixelated;">
+
+  <!-- Ton cœur pixel art ici -->
+  <rect x="4" y="3" width="2" height="2" fill="#ff0000"/>
+  <rect x="10" y="3" width="2" height="2" fill="#ff0000"/>
+  <rect x="2" y="5" width="2" height="2" fill="#ff0000"/>
+  <rect x="6" y="5" width="4" height="2" fill="#ff0000"/>
+  <rect x="12" y="5" width="2" height="2" fill="#ff0000"/>
+  <rect x="2" y="7" width="12" height="2" fill="#ff0000"/>
+  <rect x="3" y="9" width="10" height="2" fill="#ff0000"/>
+  <rect x="4" y="11" width="8" height="2" fill="#ff0000"/>
+  <rect x="6" y="13" width="4" height="2" fill="#ff0000"/>
+
+  <rect x="5" y="4" width="1" height="1" fill="#ff6666"/>
+  <rect x="7" y="6" width="2" height="1" fill="#ff6666"/>
+  <rect x="4" y="8" width="1" height="1" fill="#ff6666"/>
+
+  <!-- Slash rouge -->
+  <rect 
+    #slashRect
+    x="2" y="2" width="12" height="2" 
+    fill="#ff0000" 
+    style="opacity: 0; transform-origin: center;"
+    class="slash"
+  />
+</svg>
+
+<div *ngIf="isSlayed" class="message">
+  {{ message }}
+</div>
