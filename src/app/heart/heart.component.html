@@ -1,38 +1,108 @@
-<svg 
-  #heartSvg
-  [class.floating]="!isSlayed"
-  [class.slayed]="isSlayed"
-  (click)="onClick()"
-  width="150" 
-  height="150" 
-  viewBox="0 0 16 16" 
-  style="cursor: pointer; image-rendering: pixelated;">
+<!-- heart.component.html - Version avec modale et barre HP -->
 
-  <!-- Ton cœur pixel art ici -->
-  <rect x="4" y="3" width="2" height="2" fill="#ff0000"/>
-  <rect x="10" y="3" width="2" height="2" fill="#ff0000"/>
-  <rect x="2" y="5" width="2" height="2" fill="#ff0000"/>
-  <rect x="6" y="5" width="4" height="2" fill="#ff0000"/>
-  <rect x="12" y="5" width="2" height="2" fill="#ff0000"/>
-  <rect x="2" y="7" width="12" height="2" fill="#ff0000"/>
-  <rect x="3" y="9" width="10" height="2" fill="#ff0000"/>
-  <rect x="4" y="11" width="8" height="2" fill="#ff0000"/>
-  <rect x="6" y="13" width="4" height="2" fill="#ff0000"/>
+<div class="game-container">
+  
+  <!-- Titre -->
+  <h1 class="game-title text-center mb-4">
+    ❤️ UNDERTALE HEART ❤️
+  </h1>
 
-  <rect x="5" y="4" width="1" height="1" fill="#ff6666"/>
-  <rect x="7" y="6" width="2" height="1" fill="#ff6666"/>
-  <rect x="4" y="8" width="1" height="1" fill="#ff6666"/>
+  <!-- Barre de HP -->
+  <div class="hp-container mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <span class="hp-label">HP</span>
+      <span class="hp-value">{{hp}}/{{maxHp}}</span>
+    </div>
+    <div class="hp-bar-container">
+      <div class="hp-bar" [style.width.%]="hpPercentage"></div>
+    </div>
+  </div>
 
-  <!-- Slash rouge -->
-  <rect 
-    #slashRect
-    x="2" y="2" width="12" height="2" 
-    fill="#ff0000" 
-    style="opacity: 0; transform-origin: center;"
-    class="slash"
-  />
-</svg>
 
-<div *ngIf="isSlayed" class="message">
-  {{ message }}
+
+  <!-- Cœur SVG -->
+  <div class="heart-container d-flex justify-content-center mb-4">
+    <svg 
+      #heartSvg
+      [class.floating]="!isSlayed"
+      [class.slayed]="isSlayed"
+      (click)="onClick()"
+      width="150" 
+      height="150" 
+      viewBox="0 0 16 16" 
+      style="cursor: pointer; image-rendering: pixelated;">
+
+      <!-- Cœur pixel art -->
+      <rect x="4" y="3" width="2" height="2" fill="#ff0000"/>
+      <rect x="10" y="3" width="2" height="2" fill="#ff0000"/>
+      <rect x="2" y="5" width="2" height="2" fill="#ff0000"/>
+      <rect x="6" y="5" width="4" height="2" fill="#ff0000"/>
+      <rect x="12" y="5" width="2" height="2" fill="#ff0000"/>
+      <rect x="2" y="7" width="12" height="2" fill="#ff0000"/>
+      <rect x="3" y="9" width="10" height="2" fill="#ff0000"/>
+      <rect x="4" y="11" width="8" height="2" fill="#ff0000"/>
+      <rect x="6" y="13" width="4" height="2" fill="#ff0000"/>
+
+      <!-- Highlights -->
+      <rect x="5" y="4" width="1" height="1" fill="#ff6666"/>
+      <rect x="7" y="6" width="2" height="1" fill="#ff6666"/>
+      <rect x="4" y="8" width="1" height="1" fill="#ff6666"/>
+
+      <!-- Slash rouge -->
+      <rect 
+        #slashRect
+        x="2" y="2" width="12" height="2" 
+        fill="#ff0000" 
+        style="opacity: 0; transform-origin: center;"
+        class="slash"
+      />
+    </svg>
+  </div>
+
+  <!-- Message temporaire après slayed -->
+  <div *ngIf="isSlayed && !showVictoryModal" class="slayed-message text-center">
+    <h2 class="text-warning">💀 SLAYED! 💀</h2>
+  </div>
+
+</div>
+
+<!-- Modale de Victoire Bootstrap avec style Undertale -->
+<div *ngIf="showVictoryModal" 
+     class="modal d-block victory-modal" 
+     style="background-color: rgba(0,0,0,0.9);">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content undertale-modal">
+      
+      <!-- Décorations de coins -->
+      <div class="corner-decoration top-left"></div>
+      <div class="corner-decoration top-right"></div>
+      <div class="corner-decoration bottom-left"></div>
+      <div class="corner-decoration bottom-right"></div>
+      
+      <div class="modal-body text-center p-5">
+        
+        <!-- Titre de victoire avec étoiles -->
+        <div class="victory-title mb-4">
+          <h2 class="text-warning mb-0">★ Congrats!! ★</h2>
+          <div class="stars-decoration">✦ ✧ ✦</div>
+        </div>
+        
+        <!-- Message motivant -->
+        <div class="victory-message mb-4">
+          <p class="h5 text-info lh-base px-3">
+            {{currentMessage}}
+          </p>
+        </div>
+        
+        <!-- Bouton de recommencer -->
+        <button 
+          type="button" 
+          class="btn undertale-button"
+          (click)="resetGame()">
+          ⚡ RECOMMENCER ⚡
+        </button>
+        
+      </div>
+    </div>
+  </div>
 </div>

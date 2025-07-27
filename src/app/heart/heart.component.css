@@ -80,3 +80,467 @@ svg {
     transform-origin: center;
   }
   
+
+  /* heart.component.css - Version upgradée avec modale et barre HP */
+
+/* Import de la police Undertale */
+
+/* Container principal */
+.game-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Titre du jeu */
+.game-title {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1.2rem;
+  color: #ffc107;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 0px #000;
+  margin-bottom: 2rem;
+}
+
+/* === BARRE DE HP === */
+.hp-container {
+  background: #1a1a1a;
+  border: 3px solid #fff;
+  border-radius: 0;
+  padding: 1rem;
+  box-shadow: 0 0 10px rgba(255,255,255,0.1);
+}
+
+.hp-label, .hp-value {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.8rem;
+  color: #ffc107;
+  font-weight: bold;
+}
+
+.hp-bar-container {
+  width: 100%;
+  height: 20px;
+  background: #8b0000;
+  border: 2px solid #fff;
+  border-radius: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.hp-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #ff4444 0%, #ff0000 50%, #cc0000 100%);
+  transition: width 0.3s ease;
+  box-shadow: inset 0 2px 4px rgba(255,255,255,0.2);
+}
+
+/* Instructions */
+.instructions {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.7rem;
+  color: #17a2b8;
+  text-shadow: 1px 1px 0px #000;
+}
+
+/* === ANIMATIONS CŒUR === */
+svg {
+  transition: transform 0.1s ease;
+  filter: drop-shadow(0 0 10px rgba(255,0,0,0.3));
+}
+
+svg:active {
+  transform: scale(0.9);
+}
+
+svg.slayed {
+  animation: slay 1s forwards;
+}
+
+@keyframes slay {
+  0% { 
+    opacity: 1; 
+    transform: scale(1) rotate(0deg);
+    filter: brightness(1) hue-rotate(0deg);
+  }
+  50% { 
+    opacity: 0.5; 
+    transform: scale(1.2) rotate(180deg);
+    filter: brightness(2) hue-rotate(90deg);
+  }
+  100% { 
+    opacity: 0; 
+    transform: scale(0) rotate(360deg);
+    filter: brightness(3) hue-rotate(180deg);
+  }
+}
+
+@keyframes floating {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+svg.floating {
+  animation: floating 3s ease-in-out infinite;
+}
+
+@keyframes hit-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  50% { transform: translateX(4px); }
+  75% { transform: translateX(-4px); }
+}
+
+svg.hit {
+  animation: hit-shake 0.2s;
+}
+
+/* Effet slash */
+@keyframes slash-anim {
+  0% {
+    opacity: 1;
+    transform: translateX(0) rotate(20deg) scaleX(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(20px) rotate(20deg) scaleX(2);
+  }
+}
+
+.slash {
+  transform-origin: center;
+  pointer-events: none;
+}
+
+.slash.active {
+  animation: slash-anim 0.3s forwards ease-out;
+  opacity: 1 !important;
+}
+
+/* Message après slayed */
+.slayed-message h2 {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1.5rem;
+  animation: pulse 1s infinite;
+  text-shadow: 2px 2px 0px #000;
+}
+
+/* === MODALE DE VICTOIRE === */
+.victory-modal {
+  font-family: 'Press Start 2P', cursive;
+  animation: modalFadeIn 0.5s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.undertale-modal {
+  background: #0a0a0a !important;
+  border: 4px solid #fff !important;
+  border-radius: 0 !important;
+  position: relative;
+  box-shadow: 
+    0 0 20px rgba(255,255,255,0.3),
+    inset 0 0 20px rgba(255,255,255,0.1);
+  animation: modalSlideIn 0.6s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from { 
+    transform: translateY(-100px) scale(0.8);
+    opacity: 0;
+  }
+  to { 
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Décorations des coins */
+.corner-decoration {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: #fff;
+  z-index: 10;
+}
+
+.corner-decoration.top-left {
+  top: -6px;
+  left: -6px;
+}
+
+.corner-decoration.top-right {
+  top: -6px;
+  right: -6px;
+}
+
+.corner-decoration.bottom-left {
+  bottom: -6px;
+  left: -6px;
+}
+
+.corner-decoration.bottom-right {
+  bottom: -6px;
+  right: -6px;
+}
+
+/* Titre de victoire */
+.victory-title h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  animation: titleGlow 2s infinite alternate;
+  text-shadow: 
+    0 0 5px #ffc107,
+    2px 2px 0px #000;
+}
+
+@keyframes titleGlow {
+  from { text-shadow: 0 0 5px #ffc107, 2px 2px 0px #000; }
+  to { text-shadow: 0 0 15px #ffc107, 0 0 25px #ffc107, 2px 2px 0px #000; }
+}
+
+.stars-decoration {
+  font-size: 1rem;
+  color: #ffc107;
+  animation: starsSparkle 1.5s infinite;
+}
+
+@keyframes starsSparkle {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+
+/* Message de victoire */
+.victory-message p {
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: #17a2b8;
+  text-shadow: 1px 1px 0px #000;
+  animation: messageSlide 0.8s ease-out 0.3s both;
+}
+
+@keyframes messageSlide {
+  from { 
+    opacity: 0; 
+    transform: translateY(20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+/* Bouton Undertale */
+.undertale-button {
+  background: #dc3545 !important;
+  border: 3px solid #fff !important;
+  border-radius: 0 !important;
+  color: #fff !important;
+  font-family: 'Press Start 2P', cursive !important;
+  font-size: 0.7rem !important;
+  padding: 12px 24px !important;
+  transition: all 0.2s ease !important;
+  text-shadow: 1px 1px 0px #000;
+  box-shadow: 0 4px 0px #8b0000;
+  animation: buttonAppear 1s ease-out 0.6s both;
+}
+
+@keyframes buttonAppear {
+  from { 
+    opacity: 0; 
+    transform: translateY(30px) scale(0.8); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0) scale(1); 
+  }
+}
+
+.undertale-button:hover {
+  transform: translateY(-2px) scale(1.05) !important;
+  box-shadow: 
+    0 6px 0px #8b0000,
+    0 0 15px rgba(255,255,255,0.4) !important;
+  filter: brightness(1.1);
+}
+
+.undertale-button:active {
+  transform: translateY(2px) scale(0.98) !important;
+  box-shadow: 0 2px 0px #8b0000 !important;
+}
+
+
+/* Remplacez l'animation hit-shake par celle-ci dans heart.component.css */
+
+/* === ANIMATION DE DÉGÂTS UNDERTALE === */
+
+/* Animation principale de dégâts */
+@keyframes undertale-damage {
+  0% {
+    transform: translateX(0) scale(1);
+    filter: brightness(1) hue-rotate(0deg);
+  }
+  
+  /* Flash blanc instantané */
+  10% {
+    transform: translateX(0) scale(1.05);
+    filter: brightness(3) hue-rotate(0deg);
+  }
+  
+  /* Recul vers la droite */
+  20% {
+    transform: translateX(15px) scale(0.95);
+    filter: brightness(2) hue-rotate(10deg);
+  }
+  
+  /* Tremblement rapide */
+  25% {
+    transform: translateX(12px) scale(0.98);
+    filter: brightness(1.8) hue-rotate(-5deg);
+  }
+  
+  30% {
+    transform: translateX(18px) scale(0.92);
+    filter: brightness(2.2) hue-rotate(15deg);
+  }
+  
+  35% {
+    transform: translateX(14px) scale(0.96);
+    filter: brightness(1.6) hue-rotate(-10deg);
+  }
+  
+  40% {
+    transform: translateX(16px) scale(0.94);
+    filter: brightness(2) hue-rotate(8deg);
+  }
+  
+  /* Retour en position avec bounce */
+  60% {
+    transform: translateX(-3px) scale(1.02);
+    filter: brightness(1.2) hue-rotate(0deg);
+  }
+  
+  80% {
+    transform: translateX(1px) scale(0.99);
+    filter: brightness(1.1) hue-rotate(0deg);
+  }
+  
+  100% {
+    transform: translateX(0) scale(1);
+    filter: brightness(1) hue-rotate(0deg);
+  }
+}
+
+/* Classe pour l'animation de dégâts */
+svg.damage {
+  animation: undertale-damage 0.6s ease-out;
+}
+
+/* Animation des particules de dégâts (optionnel) */
+@keyframes damage-particles {
+  0% {
+    opacity: 1;
+    transform: scale(0) translateY(0);
+  }
+  
+  30% {
+    opacity: 1;
+    transform: scale(1.2) translateY(-10px);
+  }
+  
+  100% {
+    opacity: 0;
+    transform: scale(0.8) translateY(-30px);
+  }
+}
+
+/* Effet de flash rouge pour intensifier */
+@keyframes red-flash {
+  0%, 100% {
+    box-shadow: 0 0 0 rgba(255, 0, 0, 0);
+  }
+  
+  50% {
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+  }
+}
+
+svg.damage {
+  animation: 
+    undertale-damage 0.6s ease-out,
+    red-flash 0.6s ease-out;
+}
+
+/* Version alternative plus intense */
+@keyframes undertale-damage-intense {
+  0% {
+    transform: translateX(0) scale(1) rotate(0deg);
+    filter: brightness(1) contrast(1) hue-rotate(0deg);
+  }
+  
+  /* Flash blanc intense */
+  8% {
+    transform: translateX(0) scale(1.1) rotate(0deg);
+    filter: brightness(4) contrast(2) hue-rotate(0deg);
+  }
+  
+  /* Recul avec rotation */
+  15% {
+    transform: translateX(20px) scale(0.9) rotate(-2deg);
+    filter: brightness(2.5) contrast(1.5) hue-rotate(20deg);
+  }
+  
+  /* Tremblement intense */
+  20% {
+    transform: translateX(16px) scale(0.95) rotate(1deg);
+    filter: brightness(2) contrast(1.3) hue-rotate(-15deg);
+  }
+  
+  25% {
+    transform: translateX(22px) scale(0.88) rotate(-1.5deg);
+    filter: brightness(2.8) contrast(1.8) hue-rotate(25deg);
+  }
+  
+  30% {
+    transform: translateX(18px) scale(0.92) rotate(0.5deg);
+    filter: brightness(1.8) contrast(1.2) hue-rotate(-10deg);
+  }
+  
+  35% {
+    transform: translateX(20px) scale(0.9) rotate(-0.8deg);
+    filter: brightness(2.2) contrast(1.6) hue-rotate(15deg);
+  }
+  
+  40% {
+    transform: translateX(17px) scale(0.94) rotate(0.3deg);
+    filter: brightness(1.9) contrast(1.3) hue-rotate(-8deg);
+  }
+  
+  /* Retour progressif */
+  60% {
+    transform: translateX(-4px) scale(1.03) rotate(0deg);
+    filter: brightness(1.3) contrast(1.1) hue-rotate(0deg);
+  }
+  
+  80% {
+    transform: translateX(1px) scale(0.98) rotate(0deg);
+    filter: brightness(1.1) contrast(1) hue-rotate(0deg);
+  }
+  
+  100% {
+    transform: translateX(0) scale(1) rotate(0deg);
+    filter: brightness(1) contrast(1) hue-rotate(0deg);
+  }
+}
+
+/* Pour utiliser la version intense */
+svg.damage-intense {
+  animation: undertale-damage-intense 0.8s ease-out;
+}
